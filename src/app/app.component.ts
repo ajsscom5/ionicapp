@@ -4,7 +4,16 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+ 
+
+import { SchedulePage } from '../pages/schedule/schedule';
+import { PortfolioPage } from '../pages/portfolio/portfolio';
+
+import { CoursePage } from '../pages/course/course';
+import { ServicePage } from '../pages/service/service';
+import { ArticlePage } from '../pages/article/article';
+import { ContactPage } from '../pages/contact/contact';
+import { TabsPage } from '../pages/tabs/tabs';
 
 @Component({
   templateUrl: 'app.html'
@@ -12,17 +21,20 @@ import { ListPage } from '../pages/list/list';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  //1 rootPage: any = HomePage;
+  //2 load tab
+  rootPage: any = TabsPage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any,icon:string}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
+      { title: 'Home', component: HomePage,icon:'md-home' },
+      { title: 'ตาราง', component:   SchedulePage,icon:'' },
+      { title: 'Portforio', component: PortfolioPage,icon:'' },
     ];
 
   }
@@ -39,6 +51,10 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    //setRoot replace the previous page
+    //
+    //this.nav.setRoot(page.component);
+    // over lay the oldpage
+    this.nav.push(page.component);
   }
 }
